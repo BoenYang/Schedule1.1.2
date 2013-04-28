@@ -27,8 +27,7 @@ public class FileUtil {
 		FileInputStream fileInputStream = null;
 		FileOutputStream fileOutputStream = null;
 
-		byte[] bytes;
-		bytes = new byte[(int) inputFile.length()];
+		byte[] bytes = new byte[(int) inputFile.length()];
 
 		try {
 			fileInputStream = new FileInputStream(inputFile);
@@ -38,8 +37,10 @@ public class FileUtil {
 			return true;
 		} catch (FileNotFoundException e) {
 			try {
-				fileInputStream.close();
-				fileOutputStream.close();
+				if (fileInputStream != null)
+					fileInputStream.close();
+				if (fileOutputStream != null)
+					fileOutputStream.close();
 				fileInputStream = null;
 				fileOutputStream = null;
 			} catch (IOException e1) {

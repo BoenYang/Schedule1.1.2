@@ -82,8 +82,8 @@ public class WidgetDemo extends AppWidgetProvider {
 			classnum = sqLiteManager.rawClassNum();
 
 			int weeks = calendar.get(Calendar.DAY_OF_WEEK);
-			if (weeks == 0) {
-				weeks = 1;
+			if (weeks == 1) {
+				weeks = 7;
 			} else {
 				weeks = weeks - 1;
 			}
@@ -179,7 +179,7 @@ public class WidgetDemo extends AppWidgetProvider {
 						&& System.currentTimeMillis() >= end.getTimeInMillis()
 						&& System.currentTimeMillis() < startnext
 								.getTimeInMillis()) {
-					return (i + 1) * 2 + 1;
+					return (i + 1) * 2;
 				} else {
 					if (i == list.size() - 1
 							&& System.currentTimeMillis() >= end

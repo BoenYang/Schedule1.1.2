@@ -222,7 +222,6 @@ public class SelectDialog extends AlertDialog {
 														.show();
 											}
 										}
-
 									})
 							.setNegativeButton("否",
 									new DialogInterface.OnClickListener() {
@@ -233,7 +232,6 @@ public class SelectDialog extends AlertDialog {
 												int which) {
 											dialog.cancel();
 										}
-
 									}).show();
 				} else {
 					Toast.makeText(getContext(), "您要恢复的文件不存在",

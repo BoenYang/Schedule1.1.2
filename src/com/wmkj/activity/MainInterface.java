@@ -27,6 +27,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -58,8 +59,9 @@ public class MainInterface extends Activity implements Runnable {
 	public double latitude;
 	public double longitude;
 	public Location location;
-	public static final int UPDATETEXTVIEW = 1;
-	public static final int BAD_REQUEST = -1;
+	private static final int UPDATETEXTVIEW = 1;
+	private static final int BAD_REQUEST = -1;
+	private static final int BAD_LOCATION = 2;
 	public LocationManager locationManager;
 	private String weatherStr, firstday;
 	private Button more, classmanager, addclass, classreminder;
@@ -74,15 +76,16 @@ public class MainInterface extends Activity implements Runnable {
 	private int currentItem;
 	private FixedSpeedScroller scroller;
 	private Button time;
-	String updateTime ;
+	String updateTime;
 	public static DisplayMetrics dm = new DisplayMetrics();
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.new_main);
+		LinearLayout Layout = (LinearLayout)findViewById(R.layout.new_main);
+		//SetBackgroundImage.setBackGround(MainInterface.this, Layout);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		sqLiteManager = new SQLiteManager(this);
@@ -103,8 +106,8 @@ public class MainInterface extends Activity implements Runnable {
 		weatherText = (TextView) findViewById(R.id.weather);
 		freshBtn = (Button) findViewById(R.id.refresh);
 		pb = (ProgressBar) findViewById(R.id.progress);
-		time = (Button)findViewById(R.id.updatetime);
-		
+		time = (Button) findViewById(R.id.updatetime);
+
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		if (bundle != null) {
@@ -132,13 +135,14 @@ public class MainInterface extends Activity implements Runnable {
 		classreminder.setOnClickListener(new BtnListener());
 		tocurrentweek.setOnClickListener(new BtnListener());
 		freshBtn.setOnClickListener(new BtnListener());
-
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(
-				LocationManager.NETWORK_PROVIDER, 1000, 10, listener);
-		location = locationManager
-				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
+		if(locationManager != null)
+		{
+			locationManager.requestLocationUpdates(
+					LocationManager.NETWORK_PROVIDER, 1000, 10, listener);
+			location = locationManager
+					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		}
 		SharedPreferences sharedPreferences = this.getSharedPreferences(
 				"count", MODE_WORLD_READABLE);
 		weatherStr = sharedPreferences.getString("weather", "null");
@@ -159,6 +163,7 @@ public class MainInterface extends Activity implements Runnable {
 			time.setText(updateTime);
 		}
 
+		//add view 
 		for (int i = 0; i < weeknum; i++) {
 			LinearLayout linearLayout = new LinearLayout(this);
 			linearLayout.setLayoutParams(new LayoutParams(
@@ -171,7 +176,6 @@ public class MainInterface extends Activity implements Runnable {
 			Table.setRowAndColum(classnum, 7);
 			t.addForm();
 			t.setWeek(i + 1);
-			// t.loadData(i+1);
 			LayoutParams layoutParams = new LayoutParams(
 					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 			linearLayout.addView(t, layoutParams);
@@ -201,7 +205,30 @@ public class MainInterface extends Activity implements Runnable {
 		}
 
 	}
+	
+	LocationListener listener = new LocationListener() {
 
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+		}
+
+		@Override
+		public void onLocationChanged(Location location) {
+			latitude = location.getLatitude();
+			longitude = location.getLongitude();
+		}
+	};
+
+
+	
 	class BtnListener implements View.OnClickListener {
 
 		@Override
@@ -214,7 +241,7 @@ public class MainInterface extends Activity implements Runnable {
 				window.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
 				android.view.WindowManager.LayoutParams layoutParams = window
 						.getAttributes();
-				
+
 				layoutParams.x = (int) (3 * dm.density);
 				layoutParams.y = (int) (65.0f * dm.density)
 						- (int) (5 * dm.density);
@@ -241,7 +268,6 @@ public class MainInterface extends Activity implements Runnable {
 				Intent intent00 = new Intent();
 				intent00.setClass(MainInterface.this, ChangeBgActivity.class);
 				startActivity(intent00);
-				//MainInterface.this.finish();
 				break;
 			case R.id.refresh:
 				NetworkInfo networkInfo = connectivityManager
@@ -270,6 +296,7 @@ public class MainInterface extends Activity implements Runnable {
 
 	private static Boolean isExit = false;
 
+	//double click exit
 	private void exitBy2Click() {
 		Timer tExit = null;
 		if (isExit == false) {
@@ -289,50 +316,41 @@ public class MainInterface extends Activity implements Runnable {
 		}
 	}
 
+	//thread use for update weather information
 	@Override
 	public void run() {
-		
-		weatherStr = weatherUtil.getWeatherString(location.getLatitude(),
-				location.getLongitude());
-		
+
 		Message msg = new Message();
-		if (weatherStr == "error") {
+		if(location == null)
+		{
+			msg.what = BAD_LOCATION;
+		}else
+		{
+			weatherStr = weatherUtil.getWeatherString(location.getLatitude(),
+					location.getLongitude());
+		}
+		
+
+		if (weatherStr == "error" || weatherStr == null) {
 			msg.what = BAD_REQUEST;
 		} else {
 			SharedPreferences sharedPreferences = this.getSharedPreferences(
 					"count", Context.MODE_WORLD_READABLE);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTimeInMillis(System.currentTimeMillis());
-			updateTime = (calendar.get(Calendar.MONTH)+1)+"-"+ calendar.get(Calendar.DAY_OF_MONTH) + "  " + calendar.get(Calendar.HOUR_OF_DAY) +":" + calendar.get(Calendar.MINUTE);
+			updateTime = (calendar.get(Calendar.MONTH) + 1) + "-"
+					+ calendar.get(Calendar.DAY_OF_MONTH) + "  "
+					+ calendar.get(Calendar.HOUR_OF_DAY) + ":"
+					+ calendar.get(Calendar.MINUTE);
 			Editor editor = sharedPreferences.edit();
 			editor.putString("weather", weatherStr);
-			editor.putString("time",updateTime );
+			editor.putString("time", updateTime);
 			editor.commit();
 			msg.what = UPDATETEXTVIEW;
 		}
 		handler.sendMessage(msg);
 	}
 
-	LocationListener listener = new LocationListener() {
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-		}
-
-		@Override
-		public void onLocationChanged(Location location) {
-			latitude = location.getLatitude();
-			longitude = location.getLongitude();
-		}
-	};
 
 	Handler handler = new Handler() {
 		@Override
@@ -346,6 +364,10 @@ public class MainInterface extends Activity implements Runnable {
 				break;
 			case BAD_REQUEST:
 				Toast.makeText(MainInterface.this, "获取天气数据失败",
+						Toast.LENGTH_SHORT).show();
+				break;
+			case BAD_LOCATION:
+				Toast.makeText(MainInterface.this, "获取位置数据失败",
 						Toast.LENGTH_SHORT).show();
 			}
 			super.handleMessage(msg);
@@ -477,7 +499,7 @@ public class MainInterface extends Activity implements Runnable {
 	protected void onRestart() {
 		LinearLayout llayout = (LinearLayout) findViewById(R.id.main_xml);
 		SetBackgroundImage.setBackGround(MainInterface.this, llayout);
-		Table table = (Table)viewPager.findViewWithTag("table" + currentItem);
+		Table table = (Table) viewPager.findViewWithTag("table" + currentItem);
 		table.invalidate();
 		super.onRestart();
 	}

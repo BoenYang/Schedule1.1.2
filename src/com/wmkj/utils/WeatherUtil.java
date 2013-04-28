@@ -25,6 +25,7 @@ public class WeatherUtil {
 	}
 
 	public String getWeatherString(double latitude, double longitude) {
+		
 		String city = getCity(latitude, longitude);
 		String str = null;
 		try {
