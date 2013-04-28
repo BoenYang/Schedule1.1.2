@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_xml"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg01"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/black_title" >
+
+        <Button
+            android:id="@+id/preweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/displsyweek_prev"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/displayweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/nextweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/displayweek"
+            android:background="@drawable/displayweek_next"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/tocurrentweek"
+            android:layout_width="60dp"
+            android:layout_height="34dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/currentweek_handler" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tablepage"
+        android:layout_width="fill_parent"
+        android:layout_height="280dip" >
+    </android.support.v4.view.ViewPager>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="17dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/weather"
+            android:gravity="top"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/refresh" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_alignBaseline="@id/refresh"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/refresh"
+            android:layout_below="@id/weather"
+            android:layout_marginRight="10dp"
+            android:progressDrawable="@anim/loading"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/updatetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/refresh"
+            android:layout_below="@id/weather"
+            android:layout_marginRight="40dp"
+            android:background="#00000000"
+            android:focusable="false"
+            android:textSize="10dp"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/black_title"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:id="@+id/class_manager"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/manager_handler" />
+
+            <Button
+                android:id="@+id/class_adder"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/add_handler" />
+
+            <Button
+                android:id="@+id/class_reminder"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/changebg_handler" />
+
+            <Button
+                android:id="@+id/more"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/more_handler" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

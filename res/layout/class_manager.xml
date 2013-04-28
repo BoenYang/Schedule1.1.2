@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/cm"
+    android:background="@drawable/bg01"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_title" >
+
+        <Button
+            android:id="@+id/class_manager_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/displsyweek_prev" />
+
+        <TextView
+            android:id="@+id/displayweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="课程管理"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/cmsave"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/save_handler"
+            android:gravity="center_vertical" />
+    </RelativeLayout>
+
+    <com.wmkj.view.CornerListView
+        android:id="@+id/classlist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="6dp"
+        android:cacheColorHint="#00000000"
+        android:padding="6dp" >
+    </com.wmkj.view.CornerListView>
+
+</LinearLayout>

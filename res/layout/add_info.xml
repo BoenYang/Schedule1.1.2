@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dip"
+        android:paddingTop="10dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="5dp"
+            android:text="课程安排"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </RelativeLayout>
+    <!-- 分割线 -->
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:background="#000000" />
+
+    <!-- 分割线 -->
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.wmkj.view.LineEditText
+            android:id="@+id/class_placeText"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:hint="上课地点(八个字内)"
+            android:inputType="text"
+            android:maxLength="8" />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="周次"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="从"
+                android:textSize="15dp" />
+
+            <com.wmkj.view.LineEditText
+                android:id="@+id/start_weekText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="周到"
+                android:textSize="15dp" />
+
+            <com.wmkj.view.LineEditText
+                android:id="@+id/end_weekText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="周"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="每"
+                android:textSize="15dp" />
+
+            <com.wmkj.view.LineEditText
+                android:id="@+id/every_weekText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="周上课"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="节次"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="周"
+                android:textSize="15dp" />
+
+            <com.wmkj.view.LineEditText
+                android:id="@+id/week_dateText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第"
+                android:textSize="15dp" />
+
+            <com.wmkj.view.LineEditText
+                android:id="@+id/class_numText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="节上"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="10dip"
+            android:paddingTop="15dip" >
+
+            <Button
+                android:id="@+id/dialog_button_ok"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="确定" />
+
+            <Button
+                android:id="@+id/dialog_button_cancel"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_toRightOf="@id/dialog_button_ok"
+                android:text="取消" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

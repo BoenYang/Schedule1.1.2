@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/addclass"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg01"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/black_title"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/title_backBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/displsyweek_prev"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="添加课程"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/title_saveBut"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/save_handler"
+            android:gravity="center_vertical" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="课程信息"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <!-- 分割线 -->
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#4DC1EA" />
+
+    <!-- 分割线 -->
+
+    <EditText
+        android:id="@+id/class_nameText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="课程名称(四个字内)"
+        android:inputType="text"
+        android:maxLength="4" />
+
+    <EditText
+        android:id="@+id/teacher_nameText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="任课教师"
+        android:inputType="text"
+        android:maxLength="10" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="课程安排"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#4DC1EA" />
+
+    <Button
+        android:id="@+id/add_infoBUt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="添加课程安排" />
+
+    <com.wmkj.view.CornerListView
+        android:id="@+id/classinfolist"
+        android:background="@drawable/shape_bg_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000" >
+    </com.wmkj.view.CornerListView>
+
+</LinearLayout>

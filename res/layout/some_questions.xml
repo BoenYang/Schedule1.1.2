@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/question"
+    android:background="@drawable/bg01" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_title"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/some_questions_title_backBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/displsyweek_prev" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="学期信息"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本学期共有多少周:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/how_many_weekText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="20"
+            android:inputType="number"
+            android:maxLength="3" >
+
+            <requestFocus />
+        </EditText>
+    </TableRow>
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一天有共有几节课:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/how_many_classText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="4"
+            android:inputType="number"
+            android:maxLength="3" />
+    </TableRow>
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本学期第一周的周一:"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/school_opendayText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:editable="false"
+            android:focusableInTouchMode="true"
+            android:hint="日期" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/some_questions_saveBut"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="保存信息" />
+
+</TableLayout>

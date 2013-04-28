@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: 1
+Bundle-SymbolicName: Schedule1.1
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: 1.jar,
+ yangbowen/Deskopt/android-support-v4.jar
+Export-Package: com.wmkj.activity,
+ com.wmkj.data,
+ com.wmkj.utils,
+ com.wmkj.view,
+ com.wmkj.widget

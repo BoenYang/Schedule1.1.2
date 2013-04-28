@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settingdialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_diaglog"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/dialog_backupBut"
+        style="@style/mybutton_sytle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:text="备 份"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/dialog_restoreBut"
+        style="@style/mybutton_sytle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:text="恢 复"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/changbgBut"
+        style="@style/mybutton_sytle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginTop="7dp"
+        android:text="智能情景模式" />
+
+    <Button
+        android:id="@+id/time"
+        style="@style/mybutton_sytle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginTop="7dp"
+        android:text="上课时间" />
+
+    <Button
+        android:id="@+id/helpBut"
+        style="@style/mybutton_sytle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:text="帮 助"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/aboutBut"
+        style="@style/mybutton_sytle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:text="关 于"
+        android:textSize="15dp" />
+
+</LinearLayout>
