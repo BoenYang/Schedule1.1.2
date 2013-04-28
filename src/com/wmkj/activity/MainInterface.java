@@ -76,7 +76,7 @@ public class MainInterface extends Activity implements Runnable {
 	private int currentItem;
 	private FixedSpeedScroller scroller;
 	private Button time;
-	String updateTime;
+	private String updateTime;
 	public static DisplayMetrics dm = new DisplayMetrics();
 
 	@Override
@@ -84,8 +84,10 @@ public class MainInterface extends Activity implements Runnable {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.new_main);
-		LinearLayout Layout = (LinearLayout)findViewById(R.layout.new_main);
-		//SetBackgroundImage.setBackGround(MainInterface.this, Layout);
+		
+		LinearLayout Layout = (LinearLayout)findViewById(R.id.main_xml);
+		SetBackgroundImage.setBackGround(MainInterface.this, Layout);
+		
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		sqLiteManager = new SQLiteManager(this);

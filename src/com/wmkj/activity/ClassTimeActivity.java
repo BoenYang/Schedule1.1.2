@@ -125,9 +125,13 @@ public class ClassTimeActivity extends Activity {
 
 		if (times.size() != 0) {
 			for (int i = 0; i < MainInterface.classnum; i++) {
+				String strs[] = new String[2];
+				strs = times.get(i).split("~");
 				HashMap<String, Object> item = new HashMap<String, Object>();
 				item.put("id", (i + 1));
 				item.put("time", times.get(i));
+				startT.add(strs[0]);
+				endT.add(strs[1]);
 				items.add(item);
 			}
 		} else {
@@ -245,68 +249,94 @@ public class ClassTimeActivity extends Activity {
 
 					@Override
 					public void onClick(View arg0) {
-						System.out.println(position);
-
-						if (timeDialog.calendar01.getTimeInMillis() > timeDialog.calendar02
-								.getTimeInMillis()) {
-							Toast.makeText(context, "下课时间比上课时间早？",
-									Toast.LENGTH_SHORT).show();
-							return;
-						} else if (timeDialog.calendar01.getTimeInMillis() == timeDialog.calendar02
-								.getTimeInMillis()) {
-							Toast.makeText(context, "上下课时间一样？",
-									Toast.LENGTH_SHORT).show();
-							return;
-						} else if (timeDialog.str1 == null) {
-							Toast.makeText(context, "请输入上课时间",
-									Toast.LENGTH_SHORT).show();
-							return;
-						} else if (timeDialog.str2 == null) {
-							Toast.makeText(context, "请输入下课时间",
-									Toast.LENGTH_SHORT).show();
-							return;
-						}
-
-						SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-								"hh:mm");
-						Date end = null;
-						Date start = null;
-
-						if (position >= 1) {
+				
+						if (times.size() == MainInterface.classnum) {
+							if (timeDialog.str1 == null) {
+								Toast.makeText(context, "请输入上课时间",
+										Toast.LENGTH_SHORT).show();
+								return;
+							} else if (timeDialog.str2 == null) {
+								Toast.makeText(context, "请输入下课时间",
+										Toast.LENGTH_SHORT).show();
+								return;
+							}
+							SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+									"hh:mm");
 							try {
-								end = simpleDateFormat.parse(endT
-										.get(position - 1));
-								String str1 = end.getHours() + "";
-								System.out.println(str1);
-								start = simpleDateFormat.parse(timeDialog.str1);
-								String str2 = start.toLocaleString();
-								System.out.println(str2);
+								Date end = simpleDateFormat
+										.parse(timeDialog.str2);
+								Date start = simpleDateFormat
+										.parse(timeDialog.str1);
+								Date preEnd = null;
+								Date nextStart = null;
+								if (end.after(start)) {
+									if (position == 0) {
+										nextStart = simpleDateFormat
+												.parse(startT.get(position + 1));
+										if (end.after(nextStart)) {
+											Toast.makeText(context, "输入时间有误！",
+													Toast.LENGTH_SHORT).show();
+											return;
+										}
+									} else if (position == MainInterface.classnum - 1) {
+										preEnd = simpleDateFormat.parse(endT
+												.get(position - 1));
+										if (preEnd.after(start)) {
+
+											Toast.makeText(context, "输入时间有误！",
+													Toast.LENGTH_SHORT).show();
+											return;
+										}
+									}else
+									{
+										preEnd = simpleDateFormat.parse(endT
+												.get(position - 1));
+										nextStart = simpleDateFormat.parse(startT
+												.get(position + 1));
+										if (nextStart.before(end)
+												|| preEnd.after(start)) {
+											Toast.makeText(context, "输入时间有误！",
+													Toast.LENGTH_SHORT).show();
+											return;
+										}
+									}
+									startT.set(position,
+											timeDialog.str1);
+									endT.set(position, timeDialog.str2);
+									times.set(position, timeDialog.str1+ "~" + timeDialog.str2);
+									HashMap<String, Object> item  = new HashMap<String, Object>();
+									item.put("id", (position + 1));
+									item.put("time", times.get(position));
+									items.set(position,item);
+									
+								}else
+								{
+									Toast.makeText(context, "输入时间有误！",
+											Toast.LENGTH_SHORT).show();
+									return;
+								}
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
-							if (end.after(start)) {
-								Toast.makeText(ClassTimeActivity.this,
-										"请核对前后两节课的时间", Toast.LENGTH_SHORT)
-										.show();
-								return;
+						} else {
+							if(times.size() != position+1)
+							{
+								Toast.makeText(context, "请按顺序输入时间！",
+										Toast.LENGTH_SHORT).show();
+								return ;
+							}else
+							{
+								times.add(timeDialog.str1 + "~" + timeDialog.str2);
+								startT.add(timeDialog.str1);
+								endT.add(timeDialog.str2);
+								HashMap<String, Object> item  = new HashMap<String, Object>();
+								item.put("id", (position + 1));
+								item.put("time", times.get(position));
+								items.add(item);
 							}
-
 						}
-
+						
 						timeDialog.cancel();
-						HashMap<String, Object> item = new HashMap<String, Object>();
-						item.put("id", (position + 1));
-						item.put("time", timeDialog.str1 + "~"
-								+ timeDialog.str2);
-						items.set(position, item);
-
-						startT.add(timeDialog.str1);
-						endT.add(timeDialog.str2);
-
-						if (times.size() == MainInterface.classnum) {
-							times.set(position, timeDialog.str1 + "~"
-									+ timeDialog.str2);
-						}
 						adapter.notifyDataSetChanged();
 					}
 				});
